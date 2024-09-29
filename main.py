@@ -35,6 +35,7 @@ plt.show()
 X = torch.tensor(input_np_array, dtype=torch.float32)
 y = torch.tensor(students[output_cols[0]].map(target_map).values)
 
+#
 
 def one_hot_encode(vector):
     n_classes = len(vector.unique())
@@ -45,6 +46,7 @@ def one_hot_encode(vector):
 
 y_one_hot = one_hot_encode(y)
 
+#
 
 random_indices = torch.randperm(X.shape[0])
 
@@ -58,17 +60,18 @@ X_test = X[random_indices[n_train:]]
 y_test = y[random_indices[n_train:]]
 y_test_one_hot = y_one_hot[random_indices[n_train:]]
 
+#
 
 w = torch.rand((6, 3))
 b = torch.rand(3)
 
+#
 
 def softmax_activation(z):
     exponentials = torch.exp(z)
     exponentials_row_sums = torch.sum(exponentials, axis=1).unsqueeze(1)
 
     return exponentials / exponentials_row_sums
-
 
 def cross_entropy_loss(y_one_hot, activations):
     return -torch.mean(
@@ -77,6 +80,7 @@ def cross_entropy_loss(y_one_hot, activations):
         )
     )
 
+#
 
 lambda_param = 0.01
 learning_rate = 0.1
